@@ -299,7 +299,6 @@ body, #footer-outer {
 #content-main {
     position: relative;
     z-index: 0;
-    width: 700px;
     margin-right: 20px;
     float: left;
 }
@@ -332,7 +331,7 @@ div.section {
 }
 #sidebar-last {
     width: 240px;
-    float: left;
+    float: right;
 }
 #sidebar-last .block {
     margin-bottom: 3em;
@@ -1035,21 +1034,26 @@ ul.book-links .next {
 .page-header h1 {
     margin-bottom: 5px;
 }
+.request-info {
+    width: 700px;
+    float: left;
+}
 .field-el {
     margin-bottom: 25px;
 }
 
-pre.prettyprint  {
-    padding: 0px;
-     background-color: #fafafb;
-     border: none !important;
-}
- pre .str  {
-    color: #36C;
-}
- pre .lit  {
-    color: #c00;
-}
- pre .pun  {
-    color: #999;
-}
+pre {
+   background-color: ghostwhite;
+   border: 1px solid silver;
+   padding: 10px 20px;
+   margin: 20px; 
+   }
+.json-key {
+   color: #268bd2;
+   }
+.json-value {
+   color: #657b83;
+   }
+.json-string {
+   color: #2aa198;
+   }

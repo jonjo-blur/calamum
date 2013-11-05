@@ -28,24 +28,54 @@
         </div>
 
         <div id="content-main">
-          <div class="field field-el">
-            <h2>Description</h2>
-            <p><%= @resource.description %></p>
-          </div>
+          <div class="request-info">
+            <div class="field field-el">
+              <h2>Description</h2>
+              <p><%= @resource.description %></p>
+            </div>
 
-          <div class="field">
-            <h2>Parameters</h2>
-            <div class="odd">
-              <% @resource.params.each do |key, content| %>
-                <div class="parameter">
-                  <span class="param"><%= key %>
-                    <span><%= content['required'] ? 'required' : 'optional' %>, type: <%= content['type'] %></span>
-                  </span>
-                  <p><%= content['description'] %></p>
-                </div>
-              <% end %>
+            <div class="field">
+              <h2>Parameters</h2>
+              <div class="odd">
+                <% @resource.params.each do |key, content| %>
+                  <div class="parameter">
+                    <span class="param"><%= key %>
+                      <span><%= content['required'] ? 'required' : 'optional' %>, type: <%= content['type'] %></span>
+                    </span>
+                    <p><%= content['description'] %></p>
+                  </div>
+                <% end %>
+              </div>
             </div>
           </div>
+
+          <div id="sidebar-last">
+            <div class="block api-doc-block">
+              <h2>Resource Information</h2>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>API Version</td>
+                    <td><%= @version %></td>
+                  </tr>
+                  <tr>
+                    <td>HTTP Method</td>
+                    <td><%= @resource.action %></td>
+                  </tr>
+                  <tr>
+                    <td>Login Required</td>
+                    <td><%= @resource.auth %></td>
+                  </tr>
+                  <tr>
+                    <td>Response Format</td>
+                    <td>application/json</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="clear" style="clear:both"></div>
 
           <% if @resource.response %>
             <div class="group-example-request">
@@ -56,32 +86,6 @@
             </div>
           <% end %>
         </div>
-
-        <div id="sidebar-last">
-          <div class="block api-doc-block">
-            <h2>Resource Information</h2>
-            <table>
-              <tbody>
-                <tr>
-                  <td>API Version</td>
-                  <td><%= @version %></td>
-                </tr>
-                <tr>
-                  <td>HTTP Method</td>
-                  <td><%= @resource.action %></td>
-                </tr>
-                <tr>
-                  <td>Login Required</td>
-                  <td><%= @resource.auth %></td>
-                </tr>
-                <tr>
-                  <td>Response Format</td>
-                  <td>application/json</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
       </div>
 
       <div id="footer-outer">
@@ -89,6 +93,35 @@
       </div>
 
     </div>
-    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+    <script src="assets/javascripts/jquery-1.7.2.min.js"></script>
+    <script>
+      if (!library)
+       var library = {};
+
+     library.json = {
+       replacer: function(match, pIndent, pKey, pVal, pEnd) {
+        var key = '<span class=json-key>';
+        var val = '<span class=json-value>';
+        var str = '<span class=json-string>';
+        var r = pIndent || '';
+        if (pKey)
+         r = r + key + pKey.replace(/[": ]/g, '') + '</span>: ';
+       if (pVal)
+         r = r + (pVal[0] == '"' ? str : val) + pVal + '</span>';
+       return r + (pEnd || '');
+     },
+     prettyPrint: function(obj) {
+      var jsonLine = /^( *)("[\w]+": )?("[^"]*"|[\w.+-]*)?([,[{])?$/mg;
+        return JSON.stringify(obj, null, 3)
+        .replace(/&/g, '&amp;').replace(/\\"/g, '&quot;')
+        .replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(jsonLine, library.json.replacer);
+      }
+    };
+
+    var json = JSON.parse($('.content .prettyprint').html());
+
+    $('.content .prettyprint').html(library.json.prettyPrint(json));
+  </script>
   </body>
 </html>

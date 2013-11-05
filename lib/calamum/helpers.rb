@@ -5,7 +5,8 @@
 # @return [String] prettier form of the given JSON string
 def pj(json, indent = '&nbsp;')
   require 'json'
-  JSON.pretty_generate(json, :indent => indent * 4).gsub!(/\n/, '<br/>')
+  # JSON.pretty_generate(json, :indent => indent * 4).gsub!(/\n/, '<br/>')
+  JSON.generate(json)
 end
 
 # Output info message to console.
