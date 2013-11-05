@@ -19,3 +19,6 @@ pkg
 *.iml
 *.ipr
 *.iws
+
+## GEM
+*.gem
