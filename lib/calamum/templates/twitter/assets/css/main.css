@@ -330,7 +330,7 @@ div.section {
     margin-bottom: 2em;
 }
 #sidebar-last {
-    width: 240px;
+    width: 300px;
     float: right;
 }
 #sidebar-last .block {
@@ -1035,7 +1035,7 @@ ul.book-links .next {
     margin-bottom: 5px;
 }
 .request-info {
-    width: 700px;
+    width: 620px;
     float: left;
 }
 .field-el {

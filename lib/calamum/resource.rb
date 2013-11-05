@@ -3,7 +3,7 @@
 # So anywhere in view template we can use this object.
 class Calamum::Resource
   attr_accessor :uri, :action, :headers,
-    :auth, :params, :errors, :description, :response, :tryit
+    :auth, :params, :errors, :format, :description, :response, :tryit
 
   # Initialize object from attributes.
   #
@@ -15,6 +15,7 @@ class Calamum::Resource
     @auth = !!attrs['authentication']
     @params = attrs['params'] || {}
     @errors = attrs['errors'] || {}
+    @format = attrs['format'] || 'application/json'
     @description = attrs['description']
     @response = attrs['response']
     @tryit = attrs['tryit']
