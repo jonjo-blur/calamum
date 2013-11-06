@@ -11,8 +11,11 @@ class Calamum::DocGenerator
   def self.init_base_dir
     tpl_path = Calamum::Config[:tpl_path]
     doc_path = Calamum::Config[:doc_path]
-    FileUtils.rm_r(doc_path, :force => true)
-    Dir.mkdir(doc_path)
+
+    FileUtils.mkdir_p(File.join(doc_path, 'assets')) unless File.exists?(File.join(doc_path, 'assets'))
+
+    FileUtils.rm_r(File.join(doc_path, 'assets'))
+    FileUtils.rm(Dir.glob(File.join(doc_path, '_*.html')))
 
     # copy assets from template directory
     source = File.join(tpl_path, 'assets')
