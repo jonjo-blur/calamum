@@ -1047,6 +1047,7 @@ pre {
    border: 1px solid silver;
    padding: 10px 20px;
    margin: 20px; 
+   white-space:pre-wrap;
    }
 .json-key {
    color: #268bd2;
